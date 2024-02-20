@@ -15,4 +15,6 @@ public class Request {
     private String name;
     @NotNull
     private String author;
+    private String published_by;
+    private int no_of_copies;
 }
