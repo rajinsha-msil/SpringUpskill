@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @GetMapping("/listUser/{pageNum}")
-   // @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<User> ListUsers(@PathVariable Integer pageNum)
     {
         log.info("Request Received for Listing" );
