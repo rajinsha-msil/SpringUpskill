@@ -1,10 +1,13 @@
 package com.project.login.controller;
 
+import com.project.login.entity.UserLogin;
 import com.project.login.exception.UserNotFoundException;
 import com.project.login.requests.LoginRequest;
 import com.project.login.service.UserLoginServiceImpl;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -36,6 +39,12 @@ public class UserLoginController {
     public String Unlock(@PathVariable String name) throws UserNotFoundException {
         log.info("Unlock request received for User:" + name);
         return service.UnlockAccount(name);
+    }
+
+    @GetMapping("/getByName/{name}")
+    public UserLogin GetDetails(@PathVariable String name) throws UserNotFoundException {
+        log.info("GetInfo Request Received:" + name);
+        return service.GetUserDetails(name);
     }
 
 }

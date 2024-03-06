@@ -67,4 +67,13 @@ public class UserLoginServiceImpl implements UserLoginInterface{
         }
        return "User Account Unlocked successfully";
     }
+
+    @Override
+    public UserLogin GetUserDetails(String name) throws UserNotFoundException {
+        UserLogin details = repository.getUserByName(name);
+        if (details == null) {
+            throw new UserNotFoundException("Invalid user name");
+        }
+        return details;
+    }
 }
