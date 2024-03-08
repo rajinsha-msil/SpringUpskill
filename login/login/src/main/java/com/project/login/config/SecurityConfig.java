@@ -33,7 +33,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests().requestMatchers("/user/**")
-                .authenticated().and().formLogin().and()
+                //.authenticated().and().formLogin().and()
+                .permitAll().and()
                 .authorizeHttpRequests().requestMatchers("/swagger-ui/**","/v3/**")
                 .permitAll().and().build();
                 //.authenticated().and().formLogin().and().build();

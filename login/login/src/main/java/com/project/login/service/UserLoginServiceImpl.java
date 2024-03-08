@@ -4,10 +4,15 @@ import com.project.login.entity.UserLogin;
 import com.project.login.exception.UserNotFoundException;
 import com.project.login.repository.UserLoginRepository;
 import com.project.login.requests.LoginRequest;
+import com.project.login.util.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.List;
 
 @Service
 public class UserLoginServiceImpl implements UserLoginInterface{
@@ -75,5 +80,11 @@ public class UserLoginServiceImpl implements UserLoginInterface{
             throw new UserNotFoundException("Invalid user name");
         }
         return details;
+    }
+
+    public ByteArrayInputStream DownloadUserData() throws IOException {
+        List<UserLogin> users = repository.findAll();
+        ByteArrayInputStream data = ExcelUtil.dataToExcel(users);
+        return data;
     }
 }
